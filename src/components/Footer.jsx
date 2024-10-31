@@ -15,9 +15,11 @@ const SocialMediaLink = ({ href, icon, hoverClass }) => {
 };
 
 const Footer = () => (
-  <div className="w-full absolute-0 bg-transparent text-blue-900 py-4 mt-4">
+  <div className="w-full absolute-0 bg-transparent text-white py-4 mt-4">
     <div className="flex items-center justify-between px-4">
-      <div className="text-sm font-bold">© 2024 RentEz - All Rights Reserved</div>
+      <div className="text-sm font-bold">
+        © 2024 RentEz - All Rights Reserved
+      </div>
       <div className="flex space-x-4">
         <SocialMediaLink
           href="https://facebook.com"
@@ -45,4 +47,3 @@ const Footer = () => (
 );
 
 export default Footer;
-

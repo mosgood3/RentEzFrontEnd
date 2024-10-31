@@ -45,6 +45,7 @@ const Update = () => {
         <button
           className="w-full mb-4 text-[18px] mt-6 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
           type="submit"
+          onClick={() => navigate("/login")}
         >
           Update
         </button>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import SNavbar from "./SNavbar";
-import backgroundImage from "/src/assets/images/login.jpg";
+import backgroundImage from "/src/assets/images/bg.svg";
 import Footer from "/src/components/Footer";
 import Verification from "./Verification"; // Import Verification component
 
@@ -28,7 +28,7 @@ const Forgot = () => {
     >
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md bg-white border-black border-2 opacity-100 p-8">
+        <div className="rounded-md w-full max-w-md bg-white shadow-lg opacity-100 p-8">
           <h2 className="text-4xl font-bold text-center text-black mb-10">
             Forgot Password
           </h2>
