@@ -76,7 +76,7 @@ const Login = () => {
               </div>
               <span className="m-4">
                 <button
-                  className="text-blue-500 underline"
+                  className="text-blue-500"
                   onClick={() => navigate("/login/forgot-password")}
                 >
                   Forgot Password?
@@ -93,8 +93,8 @@ const Login = () => {
               <span className="text-black">
                 New Here?{" "}
                 <button
-                  className="text-blue-500 underline"
-                  onClick={() => navigate("/register")}
+                  className="text-blue-500"
+                  onClick={() => navigate("/Sign-up")}
                 >
                   Create an Account
                 </button>
