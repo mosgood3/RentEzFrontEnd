@@ -29,7 +29,7 @@ const Lnavbar = () => {
         </button>
         <button
           className="bg-transparent text-blue-600 border-2 border-blue-600 font-bold mt-4 py-1 px-3 md:py-2 md:px-4 rounded-full lg:ml-4 text-sm md:text-base"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/Sign-up")}
         >
           Sign Up
         </button>
