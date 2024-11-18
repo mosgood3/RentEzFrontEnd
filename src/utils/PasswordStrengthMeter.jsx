@@ -26,13 +26,13 @@ function PasswordStrengthMeter({ password }) {
   }
   return (
     <div className="password-strength-meter mx-12">
-      <div className="progress-bar-container w-full bg-gray-200 rounded h-3">
+      <div className="progress-bar-container w-full bg-gray-200 rounded h-2">
         <div
-          className={`progress-bar h-3 rounded ${getProgressBarColor(strength.score)}`}
+          className={`progress-bar h-2 rounded ${getProgressBarColor(strength.score)}`}
           style={{ width: `${(strength.score / 5) * 100}%` }}
         />
       </div>
-      <p className="strength-message mt-2 text-center text-gray-700">{strength.message}</p>
+      <p className="strength-message mt-1 text-sm text-center text-gray-700">{strength.message}</p>
     </div>
   );
 }

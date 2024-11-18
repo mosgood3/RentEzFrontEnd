@@ -5,36 +5,75 @@ import { RiArrowDropDownLine, RiHomeSmile2Fill } from "react-icons/ri";
 import SNavbar from "./SNavbar";
 import backgroundImage from "/src/assets/images/bg.svg";
 import validateEmail from "/src/utils/validateEmail";
+import validatePhone from "/src/utils/validatePhone";
 import PasswordStrengthMeter from "/src/utils/PasswordStrengthMeter";
 import Footer from "/src/components/Footer";
 import { MdEmail } from "react-icons/md";
+import { createLandlord } from "/src/utils/api/LandlordPost";
+
 
 const Create = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Choose Plan");
   const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [Name, setName] = useState("");
+
+  
 
   const handlePhoneChange = (e) => {
-      setPassword(event.target.values);
-
+    const formattedPhone = validatePhone(e.target.value);
+    setPhone(formattedPhone);
   };
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateEmail(email)) {
-      setEmailError("Please enter a valid email address");
+     
+    if (!Name || !email || !selectedPlan || !password || !cpassword || !phone) {
+      alert("Please fill out all fields.");
       return;
     }
-
-    setEmailError("");
-    navigate("/");
+    if (selectedPlan == "Choose Plan") {
+      alert("Please select a plan");
+      return;
+    }
+    if (phone.toString().length < 13) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    } 
+    if (password !== cpassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+    const data = {
+      Name: Name,
+      Email: email.toLowerCase(),
+      Plan: selectedPlan,
+      Password: password,
+      PhoneNumber: phone.replace(/\D/g, ''),
+    };
+  
+    try {
+      const response = await createLandlord(data);
+      console.log("Landlord created:", response);
+      navigate("/");
+    } catch (err) {
+      console.error("Error creating landlord:", err);
+      alert(err.message || "An error occurred while creating the account.");
+    }
   };
+  
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -72,11 +111,11 @@ const Create = () => {
           <div className="relative w-1/2 mr-4">
                 <button
                   onClick={toggleDropdown}
-                  className="w-full text-[16px] mt-1 rounded-lg py-1 bg-slate-800 text-white shadow-lg border-black transition-colors flex items-center justify-center relative"
+                  className="w-full text-[16px] mt-1 rounded-lg py-1 bg-white text-slate-800 border border-slate-800 transition-colors flex items-center justify-center relative"
                   type="button"
                 >
                   <span className="flex text-md items-start">{selectedPlan}</span>
-                  <RiArrowDropDownLine className="absolute right-4 text-4xl" />
+                  <RiArrowDropDownLine className="absolute right-0 text-2xl" />
                 </button>
 
                 {isOpen && (
@@ -124,62 +163,55 @@ const Create = () => {
               {phoneError && <p className="text-red-500 text-sm mt-4">{phoneError}</p>}
             </div>
           </div>
-            
-            <div className="flex space-x-2 mb-12">
-              <div className="relative w-1/2">
-                <input
-                  type="text"
-                  id="firstName"
-                  className="block w-full py-2.5 px-0 text-sm text-slate-800 bg-transparent border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=" "
-                  maxlength = "50"
-                />
-                <label
-                  htmlFor="firstName"
-                  className="absolute text-sm text-slate-800 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
-                >
-                  First Name
-                </label>
-              </div>
-              <div className="relative w-1/2">
+  
+          <div className="relative mb-8">
               <FaUser className="absolute right-2 top-4 text-slate-800" />
                 <input
                   type="text"
                   id="lastName"
+                  value = {Name}
+                  onChange={(e) => setName(e.target.value)}
                   className="block w-full py-2.5 px-0 text-sm text-slate-800 bg-transparent border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
-                  maxlength = "50"
+                  maxLength = "50"
                 />
                 <label
                   htmlFor="lastName"
                   className="absolute text-sm text-slate-800 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
                 >
-                  Last Name
+                  Name (Person or Business)
                 </label>
               </div>
-            </div>
           
             <div className="relative mb-12">
               <MdEmail className="absolute right-2 top-4 text-slate-800" />
               <input
                 type="text"
+                id = "email"
                 className="block w-full py-2.5 px-0 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 value={email}
-                maxlength = "254"
-                onChange={(e) => setEmail(e.target.value)}
+                maxLength = "254"
+                onChange={(e) => {
+                  const newEmail = e.target.value;
+                  setEmail(newEmail);
+                  if (newEmail && !validateEmail(newEmail)) {
+                    setEmailError("Please enter a valid email address.");
+                  } else {
+                    setEmailError("");
+                  }
+                }}
               />
               <label
                 htmlFor="email"
                 className="absolute text-sm text-slate-800 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
               >
-                Your Email
+                Email Address
               </label>
               {emailError && <p className="text-red-500 text-sm mt-4">{emailError}</p>}
             </div>
             <div className="flex flex-col space-y-4">
-      {/* Password input fields */}
-      <div className="flex space-x-2 mb-4">
+      <div className="flex space-x-2 mb-2">
         <div className="relative w-1/2">
           <input
             type="password"
@@ -201,6 +233,8 @@ const Create = () => {
           <input
             type="password"
             id="confirmPassword"
+            value = {cpassword}
+            onChange={(e) => setCpassword(e.target.value)}
             className="block w-full py-2.5 px-0 text-sm text-slate-800 bg-transparent border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
           />
@@ -212,10 +246,14 @@ const Create = () => {
           </label>
         </div>
         
+        
       </div>
-      <div className="w-full mt-10">
+      <div className="w-full">
+      {passwordError && <p className="text-red-500 text-center text-sm my-2">{passwordError}</p>}
+      </div>
+      <div className="w-full mt-2">
           <PasswordStrengthMeter password={password} />
-          </div>
+      </div>
     </div>
 
             

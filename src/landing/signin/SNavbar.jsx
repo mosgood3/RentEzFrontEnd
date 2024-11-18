@@ -1,5 +1,6 @@
 import React from "react";
 import { RiHomeSmile2Fill } from "react-icons/ri";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 const SNavbar = () => {
@@ -18,12 +19,15 @@ const SNavbar = () => {
         </h2>
       </div>
       {/* Home Button beneath the Logo and Title */}
-      <button
-        className="bg-transparent text-white text-lg py-1 px-3 md:py-2 md:px-4 hover:text-blue-900 rounded-full transition-colors"
-        onClick={() => navigate("/")}
-      >
-        Back to Home
-      </button>
+      <div className="flex flex-row">
+        <button
+          className="flex items-center bg-transparent text-white text-lg py-1 px-3 md:py-2 md:px-4 hover:text-blue-900 rounded-full transition-colors"
+          onClick={() => navigate("/")}
+        >
+          <IoMdArrowRoundBack className="mr-2" /> {/* Add margin to the icon */}
+          Back to Home
+        </button>
+      </div>
     </div>
   );
 };
