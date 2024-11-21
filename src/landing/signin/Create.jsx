@@ -16,7 +16,6 @@ const Create = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Choose Plan");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
@@ -58,14 +57,6 @@ const Create = () => {
     }
   };
   
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handlePlanSelect = (plan) => {
-    setSelectedPlan(plan);
-    setIsOpen(false);
-  };
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
@@ -84,74 +75,14 @@ const Create = () => {
     >
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-8">
-          <h2 className="text-4xl font-bold text-center text-slate-800 mb-6">
+        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg mb-8 p-8">
+          <h2 className="text-4xl font-bold text-center text-slate-800">
             Create Account
           </h2>
 
 
           <form onSubmit={handleSubmit}>
-          <div className="flex space-x-2 mt-4">
-          <div className="mb-8">
-  <div className="grid grid-cols-3 justify-center gap-6">
-    <label
-      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
-        selectedPlan === "Basic"
-          ? "border-blue-600 bg-blue-50 text-blue-600"
-          : "border-gray-300 bg-white text-slate-800"
-      }`}
-    >
-      <input
-        type="radio"
-        name="plan"
-        value="Basic"
-        checked={selectedPlan === "Basic"}
-        onChange={(e) => setSelectedPlan(e.target.value)}
-        className="hidden"
-      />
-      <p className="text-lg font-semibold">Basic</p>
-      <p className="text-sm">$ 4.99/mo</p>
-    </label>
-    <label
-      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
-        selectedPlan === "Standard"
-          ? "border-blue-600 bg-blue-50 text-blue-600"
-          : "border-gray-300 bg-white text-slate-800"
-      }`}
-    >
-      <input
-        type="radio"
-        name="plan"
-        value="Standard"
-        checked={selectedPlan === "Standard"}
-        onChange={(e) => setSelectedPlan(e.target.value)}
-        className="hidden"
-      />
-      <p className="text-lg font-semibold">Standard</p>
-      <p className="text-sm">$ 9.99/mo</p>
-    </label>
-    <label
-      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
-        selectedPlan === "Premium"
-          ? "border-blue-600 bg-blue-50 text-blue-600"
-          : "border-gray-300 bg-white text-slate-800"
-      }`}
-    >
-      <input
-        type="radio"
-        name="plan"
-        value="Premium"
-        checked={selectedPlan === "Premium"}
-        onChange={(e) => setSelectedPlan(e.target.value)}
-        className="hidden"
-      />
-      <p className="text-lg font-semibold">Premium</p>
-      <p className="text-sm">$ 19.99/mo</p>
-    </label>
-  </div>
-</div>
-  </div>
-          <div className="relative mt-4 mb-8">
+          <div className="relative mt-12 mb-8">
             
               <FaUser className="absolute right-2 top-4 text-slate-800" />
                 <input
