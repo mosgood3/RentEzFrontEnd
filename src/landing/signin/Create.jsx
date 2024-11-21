@@ -5,7 +5,6 @@ import { RiArrowDropDownLine, RiHomeSmile2Fill } from "react-icons/ri";
 import SNavbar from "./SNavbar";
 import backgroundImage from "/src/assets/images/bg.svg";
 import validateEmail from "/src/utils/validateEmail";
-import validatePhone from "/src/utils/validatePhone";
 import PasswordStrengthMeter from "/src/utils/PasswordStrengthMeter";
 import Footer from "/src/components/Footer";
 import { MdEmail } from "react-icons/md";
@@ -17,35 +16,21 @@ const Create = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Choose Plan");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
   const [Name, setName] = useState("");
 
-  
-
-  const handlePhoneChange = (e) => {
-    const formattedPhone = validatePhone(e.target.value);
-    setPhone(formattedPhone);
-  };
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
      
-    if (!Name || !email || !selectedPlan || !password || !cpassword || !phone) {
+    if (!Name || !email || !selectedPlan || !password || !cpassword) {
       alert("Please fill out all fields.");
       return;
     }
     if (selectedPlan == "Choose Plan") {
       alert("Please select a plan");
-      return;
-    }
-    if (phone.toString().length < 13) {
-      alert("Please enter a valid phone number.");
       return;
     }
     if (!validateEmail(email)) {
@@ -60,8 +45,7 @@ const Create = () => {
       Name: Name,
       Email: email.toLowerCase(),
       Plan: selectedPlan,
-      Password: password,
-      PhoneNumber: phone.replace(/\D/g, ''),
+      Password: password
     };
   
     try {
@@ -101,70 +85,74 @@ const Create = () => {
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
         <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-8">
-          <h2 className="text-4xl font-bold text-center text-slate-800 mb-10">
-            Create account
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-6">
+            Create Account
           </h2>
 
 
           <form onSubmit={handleSubmit}>
-          <div className="flex space-x-2 mt-8 mb-12">
-          <div className="relative w-1/2 mr-4">
-                <button
-                  onClick={toggleDropdown}
-                  className="w-full text-[16px] mt-1 rounded-lg py-1 bg-white text-slate-800 border border-slate-800 transition-colors flex items-center justify-center relative"
-                  type="button"
-                >
-                  <span className="flex text-md items-start">{selectedPlan}</span>
-                  <RiArrowDropDownLine className="absolute right-0 text-2xl" />
-                </button>
-
-                {isOpen && (
-                  <div className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10">
-                    <button
-                      className="w-full flex justify-between text-left text-sm px-2 py-2 hover:bg-gray-100"
-                      onClick={() => handlePlanSelect("Basic")}
-                    >
-                      <span>Basic</span>
-                      <span>$4.99/month</span>
-                    </button>
-                    <button
-                      className="w-full flex justify-between text-sm text-left px-2 py-2 hover:bg-gray-100"
-                      onClick={() => handlePlanSelect("Standard")}
-                    >
-                      <span>Standard</span>
-                      <span>$9.99/month</span>
-                    </button>
-                    <button
-                      className="w-full flex justify-between text-sm text-left px-2 py-2 hover:bg-gray-100"
-                      onClick={() => handlePlanSelect("Premium")}
-                    >
-                      <span>Premium</span>
-                      <span>$19.99/month</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-            <div className="relative w-1/2">
-              <FaPhoneAlt className="absolute right-2 top-4 text-slate-800" />
-              <input
-                type="text"
-                id="phone"
-                className="block w-full py-2.5 px-0 text-sm text-slate-800 bg-transparent border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                value={phone}
-                onChange={handlePhoneChange}
-              />
-              <label
-                htmlFor="phone"
-                className="absolute text-sm text-slate-800 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
-              >
-                Phone Number
-              </label>
-              {phoneError && <p className="text-red-500 text-sm mt-4">{phoneError}</p>}
-            </div>
-          </div>
-  
-          <div className="relative mb-8">
+          <div className="flex space-x-2 mt-4">
+          <div className="mb-8">
+  <div className="grid grid-cols-3 justify-center gap-6">
+    <label
+      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
+        selectedPlan === "Basic"
+          ? "border-blue-600 bg-blue-50 text-blue-600"
+          : "border-gray-300 bg-white text-slate-800"
+      }`}
+    >
+      <input
+        type="radio"
+        name="plan"
+        value="Basic"
+        checked={selectedPlan === "Basic"}
+        onChange={(e) => setSelectedPlan(e.target.value)}
+        className="hidden"
+      />
+      <p className="text-lg font-semibold">Basic</p>
+      <p className="text-sm">$ 4.99/mo</p>
+    </label>
+    <label
+      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
+        selectedPlan === "Standard"
+          ? "border-blue-600 bg-blue-50 text-blue-600"
+          : "border-gray-300 bg-white text-slate-800"
+      }`}
+    >
+      <input
+        type="radio"
+        name="plan"
+        value="Standard"
+        checked={selectedPlan === "Standard"}
+        onChange={(e) => setSelectedPlan(e.target.value)}
+        className="hidden"
+      />
+      <p className="text-lg font-semibold">Standard</p>
+      <p className="text-sm">$ 9.99/mo</p>
+    </label>
+    <label
+      className={`cursor-pointer border rounded-lg p-4 text-center shadow-md transition-transform transform hover:scale-110 ${
+        selectedPlan === "Premium"
+          ? "border-blue-600 bg-blue-50 text-blue-600"
+          : "border-gray-300 bg-white text-slate-800"
+      }`}
+    >
+      <input
+        type="radio"
+        name="plan"
+        value="Premium"
+        checked={selectedPlan === "Premium"}
+        onChange={(e) => setSelectedPlan(e.target.value)}
+        className="hidden"
+      />
+      <p className="text-lg font-semibold">Premium</p>
+      <p className="text-sm">$ 19.99/mo</p>
+    </label>
+  </div>
+</div>
+  </div>
+          <div className="relative mt-4 mb-8">
+            
               <FaUser className="absolute right-2 top-4 text-slate-800" />
                 <input
                   type="text"

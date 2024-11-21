@@ -94,7 +94,7 @@ const Login = () => {
                 New Here?{" "}
                 <button
                   className="text-blue-500"
-                  onClick={() => navigate("/Sign-up")}
+                  onClick={() => navigate("/sign-up")}
                 >
                   Create an Account
                 </button>
