@@ -1,6 +1,6 @@
 import React from "react";
 import { FaEnvelope } from "react-icons/fa"; // Make sure to import any necessary icons
-import Footer from "../components/Footer"; // Adjust the import path based on your project structure
+import Footer from "../Footer"; // Adjust the import path based on your project structure
 import { RiHomeSmile2Fill } from "react-icons/ri";
 import Lnavbar from "./Lnavbar";
 

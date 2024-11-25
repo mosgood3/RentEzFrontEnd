@@ -12,8 +12,8 @@ function PasswordStrengthMeter({ password }) {
       case 2:
         return "bg-red-500";
       case 3:
-        return "bg-yellow-500";
       case 4:
+        return "bg-yellow-500";
       case 5:
         return "bg-green-500";
       default:
@@ -32,7 +32,7 @@ function PasswordStrengthMeter({ password }) {
           style={{ width: `${(strength.score / 5) * 100}%` }}
         />
       </div>
-      <p className="strength-message mt-1 text-sm text-center text-gray-700">{strength.message}</p>
+      <p className="strength-message mt-1 text-sm text-center slate-800">{strength.message}</p>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 function validatePassword(password) {
     let score = 0;
-  
+
     const lengthCriteria = password.length >= 8;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
@@ -14,11 +14,13 @@ function validatePassword(password) {
     if (hasSpecialChar) score += 1;
   
     if (score <= 2) {
-      return { message: "Weak password", score };
+      return { message: "Poor password", score };
     } else if (score === 3) {
-      return { message: "Medium password", score };
-    } else if (score >= 4) {
-      return { message: "Strong password", score };
+      return { message: "Okay password", score };
+    } else if (score === 4) {
+      return { message: "Good password", score };
+    } else if (score ===5) {
+      return {message: "Excellent password", score};
     }
   }
   

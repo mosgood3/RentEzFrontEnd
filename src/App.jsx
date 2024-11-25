@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Landing from "./landing/Landing";
-import Login from "./landing/signin/Login";
-import Update from "./landing/signin/Update";
-import Forgot from "./landing/signin/Forgot";
-import Create from "./landing/signin/Create";
-import Verification from "./landing/signin/Verification";
+import Landing from "/src/components/landing/Landing";
+import Login from "./components/signin/Login";
+import Update from "./components/signin/Update";
+import Forgot from "./components/signin/Forgot";
+import Create from "./components/signin/Create";
+import Plan from "./components/signin/Plan";
+import Verification from "./components/signin/Verification";
 import "./assets/styles/index.css";
+import { FormProvider } from "./context/FormContext";
 
 function App() {
   return (
+    <FormProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -18,9 +21,10 @@ function App() {
         <Route path="/login/forgot-password/verification" element={<Verification />} />
         <Route path="/login/new-password" element={<Update />} />
         <Route path="/sign-up" element={<Create />} />
-        <Route path="/sign-up/plan" element={<Create />} />
+        <Route path="/sign-up/plan" element={<Plan />} />
       </Routes>
     </Router>
+   </FormProvider>
   );
 }
 
