@@ -49,8 +49,6 @@ const Plan = () => {
           <h2 className="text-4xl font-bold text-center text-slate-800 mb-6">
             Choose Your Plan
           </h2>
-
-          {!submitted ? (
             <form onSubmit={handleSubmit}>
               <div>
                 <div className="grid grid-cols-3 justify-center mb-10 gap-2">
@@ -199,36 +197,24 @@ const Plan = () => {
   </div>
 </div>
 
-
+<div className="relative gap-2 mb-2 flex justify-center">
+<button
+                type="submit"
+                className="w-1/4 mb-4 justify-start text-[18px] mt-8 rounded-lg bg-slate-300 text-white hover:bg-slate-700 py-2 transition-colors duration-300"
+                onClick={() => navigate("/sign-up")}
+              >
+               Back
+              </button>
               <button
                 type="submit"
-                className="w-full mb-4 text-[18px] mt-8 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
+                className="w-1/4 mb-4 text-[18px] mt-8 rounded-lg bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
               >
-                Create
+                Next
               </button>
-              <div className="text-center mt-4">
-              <span className="text-slate-800">
-                Back to{" "}
-                <button
-                  className="text-blue-500"
-                  onClick={() => navigate("/sign-up")}
-                >
-                  account
-                </button>
-              </span>
-            </div>
+
+              </div>
             </form>
-          ) : (
-            <div className="text-center">
-              <p className="text-lg font-semibold">You have selected the {selectedPlan} plan!</p>
-              <button
-                onClick={() => setSubmitted(false)}
-                className="mt-4 text-blue-600"
-              >
-                Change Plan
-              </button>
-            </div>
-          )}
+        
         </div>
       </div>
 
