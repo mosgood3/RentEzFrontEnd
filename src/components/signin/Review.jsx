@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import SNavbar from "./SNavbar";
 import backgroundImage from "/src/assets/images/bg.svg";
 import Footer from "/src/components/Footer";
+import FormContext from "../../context/FormContext";
+import getCardType from "../../utils/validation/cardType";
 
 const Review = () => {
   const navigate = useNavigate();
+  const { formData, setFormData, nextStep } = useContext(FormContext);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +19,7 @@ const Review = () => {
 
   const handleForgotPasswordSubmit = (e) => {
     e.preventDefault();
-    setShowVerification(true); // Show verification after forgot password is submitted
+    setShowVerification(true);
   };
 
   return (
@@ -29,54 +33,73 @@ const Review = () => {
     >
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-8">
-          <h2 className="text-4xl font-bold text-center text-black mb-10">
-            New Password
+        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-6">
+          <h2 className="text-4xl font-bold text-center text-black mb-6">
+            Summary
           </h2>
           <form onSubmit={handleSubmit}>
-          <div className="relative my-10">
-              <FaLock className="absolute right-2 top-4 text-black" />
-              <input
-                type="password"
-                className="block w-full py-2.5 px-0 text-sm text-black bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-              />
-              <label
-                htmlFor="password"
-                className="absolute text-sm text-black duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
-              >
-                New Password
-              </label>
+          <div className="relative bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-lg p-4 text-white w-96 mx-auto">
+          <div className="flex justify-between items-center">
+            <div>
+            <label className="text-xs uppercase font-semibold tracking-wide">Plan</label>
+            <span className="block text-lg font-mono">{formData?.plan || "No data available"}</span>
             </div>
-            <div className="relative my-10">
-              <FaLock className="absolute right-2 top-4 text-black" />
-              <input
-                type="password"
-                className="block w-full py-2.5 px-0 text-sm text-black bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-              />
-              <label
-                htmlFor="password"
-                className="absolute text-sm text-black duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-8"
-              >
-                Confirm Password
-              </label>
+            <div>
+            <span className="block text-6xl">
+            {React.createElement(getCardType(formData?.card))}
+          </span>
             </div>
+          </div>
+          <div className="mb-2">
+            <label className="text-xs uppercase font-semibold tracking-wide">Card Number</label>
+            <span className="block text-lg font-mono">{formData?.card || "xxxx xxxx xxxx xxxx"}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <div>
+              <label className="text-xs uppercase font-semibold tracking-wide">Name on Card</label>
+              <span className="block text-lg font-bold">{formData?.namecard || "MM/YY"}</span>
+            </div>
+            <div>
+              <label className="text-xs uppercase font-semibold tracking-wide">Exp Date</label>
+              <span className="block text-sm">{formData?.expdate || "John Smith"}</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between items-center mt-6 mx-8 space-x-4">
+  <label className="text-sm font-semibold text-gray-700">Email Address:</label>
+  <span className="text-lg text-gray-900">{formData?.email || "john.smith@example.com"}</span>
+</div>
+
+<div className="flex justify-between items-center mt-6 mx-8 border-b-2 border-gray-600 pb-2">
+  <label className="text-sm font-semibold text-gray-700">Billing Address:</label>
+  <span className="text-lg text-gray-900">{formData?.billingaddress || "1234 Main St, City, Country"}</span>
+</div>
+
+{/* Total Due Section */}
+<div className="flex justify-between items-center mt-6 mx-8">
+  <label className="text-sm font-semibold text-gray-700">Total Due:</label>
+  <span className="text-lg font-bold text-green-500">
+    ${formData?.plan === "Basic" ? "4.99" : formData?.plan === "Standard" ? "9.99" : formData?.plan === "Premium" ? "19.99" : "0.00"}
+  </span>
+</div>
+
+
+
             <button
               className="w-full mb-4 text-[18px] mt-6 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
               type="submit"
               onClick={() => navigate("/login")}
             >
-              Update
+              Subscribe
             </button>
             <div className="text-center">
               <span>
                 Back to{" "}
                 <button
                   className="text-blue-500"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/sign-up/plan")}
                 >
-                  Login
+                  Plan
                 </button>
               </span>
             </div>

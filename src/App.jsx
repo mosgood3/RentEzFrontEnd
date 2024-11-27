@@ -6,6 +6,7 @@ import Update from "./components/signin/Update";
 import Forgot from "./components/signin/Forgot";
 import Create from "./components/signin/Create";
 import Plan from "./components/signin/Plan";
+import Review from "./components/signin/Review";
 import Verification from "./components/signin/Verification";
 import "./assets/styles/index.css";
 import { FormProvider } from "./context/FormContext";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login/new-password" element={<Update />} />
         <Route path="/sign-up" element={<Create />} />
         <Route path="/sign-up/plan" element={<Plan />} />
+        <Route path="/sign-up/review" element={<Review />} />
       </Routes>
     </Router>
    </FormProvider>

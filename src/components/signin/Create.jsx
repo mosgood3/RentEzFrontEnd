@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import SNavbar from "./SNavbar";
 import validatePassword from "../../utils/validation/validatePassword";
@@ -15,7 +16,6 @@ const Create = () => {
   const { formData, setFormData, nextStep } = useContext(FormContext);
 
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [strength, setStrength] = useState(null);
 
@@ -61,9 +61,9 @@ const Create = () => {
     >
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg mb-8 p-8">
+        <div className="rounded-md w-full max-w-md h-full bg-white shadow-md mb-2 p-6">
           <h2 className="text-4xl font-bold text-center text-slate-800">
-            Create Account
+            Create Login
           </h2>
 
           <form onSubmit={handleSubmit}>
@@ -114,7 +114,7 @@ const Create = () => {
                 Email
               </label>
               {emailError && (
-                <p className="text-red-500 text-sm mt-4">{emailError}</p>
+                <p className="text-red-500 absolute text-sm mt-4">{emailError}</p>
               )}
             </div>
 
@@ -136,7 +136,9 @@ const Create = () => {
 
               <div
                 className="absolute right-2 top-4 cursor-pointer"
-                onClick={() => setPasswordVisible(!passwordVisible)}
+                onMouseDown={() => setPasswordVisible(true)}
+                onMouseUp={() => setPasswordVisible(false)}
+                onMouseLeave={() => setPasswordVisible(false)}
               >
                 {passwordVisible ? (
                   <FaEyeSlash className="text-slate-800" />
@@ -146,16 +148,19 @@ const Create = () => {
               </div>
             </div>
 
-            <div className="w-full mt-10">
+            <div className="w-full relative mt-6">
               <PasswordStrengthMeter password={formData.password} />
             </div>
-
+          <div className="flex mx-6 items-center">
             <button
-              className="w-full mb-4 text-[18px] mt-6 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
-              type="submit"
+            className="w-full flex items-center gap-2 justify-center mb-4 text-[18px] mt-6 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
+            type="submit"
             >
-              Next
-            </button>
+          <span> Next </span>
+          <FaArrowRight />
+          </button>
+          </div>
+
 
             <div className="text-center mt-4">
               <span className="text-slate-800">

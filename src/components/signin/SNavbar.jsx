@@ -7,7 +7,7 @@ const SNavbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center pt-8 lg:px-28 w-full">
+    <div className="flex flex-col items-center pt-2 lg:px-28 w-full">
       <button className="flex items-center mb-2"
       onClick={() => navigate("/")}>
         <RiHomeSmile2Fill className="lg:text-6xl text-4xl text-white" />
