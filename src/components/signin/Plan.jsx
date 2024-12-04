@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SNavbar from "./SNavbar";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import backgroundImage from "/src/assets/images/bg.svg";
 import Footer from "/src/components/Footer";
 import FormContext from "../../context/FormContext";
+import Background from "./Background";
 
 const Plan = () => {
   const navigate = useNavigate();
   const { formData, setFormData, nextStep } = useContext(FormContext);
-
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -48,27 +48,20 @@ const Plan = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      className="min-h-screen flex flex-col"
-    >
+    <div>
+      <Background>
       <SNavbar />
-
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md bg-white shadow-lg p-6">
+        <div className="rounded-md w-full max-w-md bg-white shadow-lg p-4">
           <h2 className="text-4xl font-bold text-center text-slate-800 mb-6">
             Choose Your Plan
           </h2>
           <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-3 justify-center mb-10 gap-4">
+          <div className="grid grid-cols-3 justify-center mb-10 gap-2">
   {["Basic", "Standard", "Premium"].map((plan) => (
     <label
       key={plan}
-      className={`relative cursor-pointer border rounded-lg p-6 text-center shadow-lg transition-transform transform hover:scale-105 ${
+      className={`relative cursor-pointer border rounded-lg p-4 text-center shadow-lg transition-transform transform hover:scale-105 ${
         formData.plan === plan
           ? "border-2 border-blue-500 shadow-xl bg-gradient-to-r from-blue-500 to-blue-700 text-white"
           : "border-slate-300 bg-white text-slate-700 hover:shadow-md"
@@ -211,6 +204,7 @@ const Plan = () => {
         </div>
       </div>
       <Footer />
+      </Background>
     </div>
   );
 };

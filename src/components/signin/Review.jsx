@@ -33,22 +33,21 @@ const Review = () => {
     >
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-6">
-          <h2 className="text-4xl font-bold text-center text-black mb-6">
+        <div className="rounded-md w-full max-w-md h-full bg-white shadow-lg p-4">
+          <h2 className="text-4xl font-bold text-center text-black mb-4">
             Summary
           </h2>
           <form onSubmit={handleSubmit}>
-          <div className="relative bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-lg p-4 text-white w-96 mx-auto">
+          <div className="relative bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-lg px-4 py-2 text-white w-5/6 mx-auto">
           <div className="flex justify-between items-center">
             <div>
-            <label className="text-xs uppercase font-semibold tracking-wide">Plan</label>
-            <span className="block text-lg font-mono">{formData?.plan || "No data available"}</span>
+            <span className="block text-lg font-bold">RentEz {formData?.plan || "No data available"}</span>
             </div>
             <div>
-            <span className="block text-6xl">
-            {React.createElement(getCardType(formData?.card))}
-          </span>
+              <label className="text-xs uppercase font-semibold tracking-wide">Exp Date</label>
+              <span className="block text-sm">{formData?.expdate || "John Smith"}</span>
             </div>
+            
           </div>
           <div className="mb-2">
             <label className="text-xs uppercase font-semibold tracking-wide">Card Number</label>
@@ -60,24 +59,25 @@ const Review = () => {
               <span className="block text-lg font-bold">{formData?.namecard || "MM/YY"}</span>
             </div>
             <div>
-              <label className="text-xs uppercase font-semibold tracking-wide">Exp Date</label>
-              <span className="block text-sm">{formData?.expdate || "John Smith"}</span>
+            <span className="block text-6xl">
+            {React.createElement(getCardType(formData?.card))}
+          </span>
             </div>
           </div>
         </div>
         <div className="flex justify-between items-center mt-6 mx-8 space-x-4">
-  <label className="text-sm font-semibold text-gray-700">Email Address:</label>
-  <span className="text-lg text-gray-900">{formData?.email || "john.smith@example.com"}</span>
+  <label className="text-sm text-slate-600">Email Address:</label>
+  <span className="text-md text-slate-800">{formData?.email || "john.smith@example.com"}</span>
 </div>
 
 <div className="flex justify-between items-center mt-6 mx-8 border-b-2 border-gray-600 pb-2">
-  <label className="text-sm font-semibold text-gray-700">Billing Address:</label>
-  <span className="text-lg text-gray-900">{formData?.billingaddress || "1234 Main St, City, Country"}</span>
+  <label className="text-sm text-slate-600">Billing Address:</label>
+  <span className="text-md text-slate-800">{formData?.billingaddress || "1234 Main St, City, Country"}</span>
 </div>
 
 {/* Total Due Section */}
 <div className="flex justify-between items-center mt-6 mx-8">
-  <label className="text-sm font-semibold text-gray-700">Total Due:</label>
+  <label className="text-sm font-semibold text-slate-600">Total Due:</label>
   <span className="text-lg font-bold text-green-500">
     ${formData?.plan === "Basic" ? "4.99" : formData?.plan === "Standard" ? "9.99" : formData?.plan === "Premium" ? "19.99" : "0.00"}
   </span>

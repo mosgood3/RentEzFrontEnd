@@ -5,11 +5,11 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import SNavbar from "./SNavbar";
 import validatePassword from "../../utils/validation/validatePassword";
-import backgroundImage from "/src/assets/images/bg.svg";
 import validateEmail from "/src/utils/validation/validateEmail";
 import PasswordStrengthMeter from "/src/utils/validation/PasswordStrengthMeter";
 import Footer from "/src/components/Footer";
 import FormContext from "../../context/FormContext";
+import Background from "./Background";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -51,17 +51,11 @@ const Create = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-      className="min-h-screen flex flex-col"
-    >
+    <div>
+    <Background>
       <SNavbar />
       <div className="flex flex-grow items-center justify-center">
-        <div className="rounded-md w-full max-w-md h-full bg-white shadow-md mb-2 p-6">
+        <div className="sm:rounded-md w-full max-w-md h-full bg-white shadow-md mb-2 p-6">
           <h2 className="text-4xl font-bold text-center text-slate-800">
             Create Login
           </h2>
@@ -118,8 +112,10 @@ const Create = () => {
               )}
             </div>
 
-            <div className="relative mb-2">
-              <input
+            <div className="relative">
+  
+    <PasswordStrengthMeter password={formData.password} />
+    <input
                 type={passwordVisible ? "text" : "password"}
                 id="createPassword"
                 value={formData.password}
@@ -146,11 +142,9 @@ const Create = () => {
                   <FaEye className="text-slate-800" />
                 )}
               </div>
+              <p className=" mt-4 mx-12 text-center text-xs text-gray-400">Minumum of 8 characters, with upper and lowercase, number and a special character</p>
             </div>
-
-            <div className="w-full relative mt-6">
-              <PasswordStrengthMeter password={formData.password} />
-            </div>
+            
           <div className="flex mx-6 items-center">
             <button
             className="w-full flex items-center gap-2 justify-center mb-4 text-[18px] mt-6 rounded-full bg-blue-600 text-white hover:bg-blue-900 py-2 transition-colors duration-300"
@@ -177,6 +171,7 @@ const Create = () => {
         </div>
       </div>
       <Footer />
+      </Background>
     </div>
   );
 };

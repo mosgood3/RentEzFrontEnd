@@ -14,13 +14,13 @@ function validatePassword(password) {
     if (hasSpecialChar) score += 1;
   
     if (score <= 2) {
-      return { message: "Poor password", score };
+      return { message: "Poor", score };
     } else if (score === 3) {
-      return { message: "Okay password", score };
+      return { message: "Okay", score };
     } else if (score === 4) {
-      return { message: "Good password", score };
+      return { message: "Good", score };
     } else if (score ===5) {
-      return {message: "Excellent password", score};
+      return {message: "Excellent", score};
     }
   }
   
