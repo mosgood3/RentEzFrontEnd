@@ -10,7 +10,7 @@ const Lnavbar = () => {
   };
 
   return (
-    <div className="fixed flex items-center py-4 px-6 lg:px-28 w-full justify-between z-50 bg-white shadow-md backdrop-blur-sm">
+    <div className="fixed flex items-center py-2 px-6 w-full justify-between z-50 bg-white shadow-lg backdrop-blur-sm">
       <div className="flex items-center">
         <RiHomeSmile2Fill className="lg:text-6xl text-4xl text-blue-600" />
         <h2 className="font-sans font-bold text-blue-600 lg:text-5xl text-4xl ml-2">
@@ -20,15 +20,15 @@ const Lnavbar = () => {
           Ez
         </h2>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex space-x-2">
         <button
-          className="text-white bg-blue-600 font-semibold py-2 px-4 rounded-full text-sm md:text-base hover:bg-blue-700 transition duration-300"
+          className="text-white bg-blue-600 font-semibold py-2 px-4 rounded-full text-xs hover:bg-blue-700 transition duration-300"
           onClick={handleLoginClick}
         >
           Log In
         </button>
         <button
-          className="text-blue-600 border-2 border-blue-600 font-semibold py-2 px-4 rounded-full text-sm md:text-base hover:bg-blue-600 hover:text-white transition duration-300"
+          className="text-blue-600 border-2 border-blue-600 font-semibold py-2 px-4 rounded-full text-xs hover:bg-blue-600 hover:text-white transition duration-300"
           onClick={() => navigate("/sign-up")}
         >
           Sign Up
